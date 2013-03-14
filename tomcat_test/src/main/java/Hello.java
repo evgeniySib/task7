@@ -1,3 +1,6 @@
+import guestbook.DbController;
+import guestbook.Record;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +16,9 @@ import java.util.List;
 @WebServlet(name = "SimpleServlet", urlPatterns = {"/simple"})
 
 
-public class Hello extends HttpServlet {
+public class Hello extends HttpServlet{
     @Resource(name = "jdbc/testDS")
-    private DataSource ds;
+    DataSource ds;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -26,6 +29,7 @@ public class Hello extends HttpServlet {
             dbconn.createTable("Guestbook");
 
         } catch (SQLException e) {
+            req.setAttribute("err1", e.getMessage());
         }
 
         List<Record> msg = new ArrayList<>();
@@ -33,10 +37,10 @@ public class Hello extends HttpServlet {
             msg = dbconn.getRecords();
             req.setAttribute("guestMsg", msg);
         } catch (SQLException e) {
-            req.setAttribute("error", e.getMessage());
+            req.setAttribute("err2", e.getMessage());
         }
         try {
-            dbconn.close();
+            dbconn.close1();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,10 +60,10 @@ public class Hello extends HttpServlet {
             dbconn.setTableName("Guestbook");
 
         } catch (SQLException e) {
-            req.setAttribute("error", e.getMessage());
+            req.setAttribute("err3", e.getMessage());
         }
         if (dbconn != null) {
-            if ((req.getParameter("name") == "")) {
+            if ((req.getParameter("name").equals(""))) {
                 dbconn.addRecord(req.getParameter("message"));
             } else {
                 dbconn.addRecord(req.getParameter("name"), req.getParameter("message"));
@@ -67,7 +71,7 @@ public class Hello extends HttpServlet {
         }
         try {
             msg = dbconn.getRecords();
-            dbconn.close();
+            dbconn.close1();
         } catch (SQLException e) {
             e.printStackTrace();
         }

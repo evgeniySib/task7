@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jsp</groupId>
-    <artifactId>jsp</artifactId>
+    <groupId>tomcat_test</groupId>
+    <artifactId>tomcat_test</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>jsp Maven Webapp</name>
+    <name>tomcat_test Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -17,13 +18,10 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
             <version>3.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -38,7 +36,6 @@
         </dependency>
 
     </dependencies>
-
     <build>
         <finalName>tomcat_test</finalName>
         <plugins>
@@ -53,4 +50,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

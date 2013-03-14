@@ -1,6 +1,10 @@
+    <%@ page import="java.util.*" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <html>
 <body>
-
+     ${err1}
+     ${err2}
+     ${err3}
     <table border="1">
 <c:forEach var="v" items= "${guestMsg}">
 
@@ -17,6 +21,6 @@
     <input type="text" name="message" />
     <input type="submit" value="Submit">
     </form>
-     ${error}
+
 </body>
 </html>
