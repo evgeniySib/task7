@@ -21,7 +21,7 @@ public class DbController {
     }
 
     public void createTable(String tName) throws SQLException {
-        statement.execute("CREATE TABLE " + tName + "(id INTEGER PRIMARY KEY AUTO_INCREMENT, postDate DATE, nickName VARCHAR(10), message TEXT)");
+        statement.execute("CREATE TABLE IF NOT EXISTS " + tName + "(id INTEGER PRIMARY KEY AUTO_INCREMENT, postDate DATE, nickName VARCHAR(10), message TEXT)");
     }
 
     public void setTableName(String tName) {
