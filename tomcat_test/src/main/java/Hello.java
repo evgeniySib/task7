@@ -19,6 +19,7 @@ import java.util.List;
 public class Hello extends HttpServlet{
     @Resource(name = "jdbc/testDS")
     DataSource ds;
+    String tName="Guestbook";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -26,7 +27,7 @@ public class Hello extends HttpServlet{
         DbController dbconn = null;
         try {
             dbconn = new DbController(ds);
-            dbconn.createTable("Guestbook");
+            dbconn.createTable(tName);
 
         } catch (SQLException e) {
             req.setAttribute("err1", e.getMessage());
@@ -34,6 +35,7 @@ public class Hello extends HttpServlet{
 
         List<Record> msg = new ArrayList<>();
         try {
+            dbconn.setTableName(tName);
             msg = dbconn.getRecords();
             req.setAttribute("guestMsg", msg);
         } catch (SQLException e) {
@@ -57,7 +59,7 @@ public class Hello extends HttpServlet{
         List<Record> msg = new ArrayList<>();
         try {
             dbconn = new DbController(ds);
-            dbconn.setTableName("Guestbook");
+            dbconn.setTableName(tName);
 
         } catch (SQLException e) {
             req.setAttribute("err3", e.getMessage());
